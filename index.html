@@ -310,9 +310,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="testa" style="margin-bottom:0">
       <p class="px">Preventivo</p>
       <h2>Raccontateci il vostro matrimonio</h2>
-      <p>Compilate il modulo: prepariamo il messaggio, voi lo inviate su Instagram. Rispondiamo entro 24 ore con listino e disponibilità.</p>
+      <p>Compilate il modulo: prepariamo il messaggio, voi lo inviate su Instagram o per email. Rispondiamo entro 24 ore con listino e disponibilità.</p>
       <div class="contatti">
         <span>Instagram: <a href="https://instagram.com/sigilloepixel" target="_blank" rel="noopener">@sigilloepixel</a></span>
+        <span>Email: <a href="mailto:sigilloepixel@gmail.com">sigilloepixel@gmail.com</a></span>
       </div>
     </div>
     <form id="modulo" novalidate>
@@ -331,6 +332,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <div class="azioni">
           <button class="btn" type="button" id="copia">Copia il messaggio</button>
           <a class="btn ghost" href="https://ig.me/m/sigilloepixel" target="_blank" rel="noopener">Apri Instagram</a>
+          <a class="btn ghost" id="via-mail" href="mailto:sigilloepixel@gmail.com">Invia per email</a>
         </div>
         <p id="copiato" style="font-size:13px;color:var(--seppia)" aria-live="polite"></p>
       </div>
@@ -415,7 +417,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     out.textContent=`Ciao Sigillo&Pixel! Siamo ${v('nomi')}.\n`+
       (d?`Ci sposiamo il ${d}`:'Non abbiamo ancora fissato la data')+(v('luogo')?` a ${v('luogo')}.`:'.')+
       `\nCi interessa: ${v('pacchetto')}.`+(v('idee')?`\nIdee: ${v('idee')}`:'')+`\nPotete mandarci listino e disponibilità?`;
-    esito.hidden=false; info.textContent=''; esito.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
+    document.getElementById('via-mail').href='mailto:sigilloepixel@gmail.com?subject='+encodeURIComponent('Richiesta preventivo – '+v('nomi'))+'&body='+encodeURIComponent(out.textContent); esito.hidden=false; info.textContent=''; esito.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
   });
   document.getElementById('copia').addEventListener('click',()=>{
     const testo=out.textContent;
