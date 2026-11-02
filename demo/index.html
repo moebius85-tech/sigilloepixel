@@ -16,7 +16,7 @@
 :root{--carta:#f6f1e7;--carta-2:#ece4d3;--inchiostro:#22263f;--seppia:#55514c;--cera:#262b4a;--cera-scura:#171a30;--oro:#a88a4f;--oro-chiaro:#d8c08a;--linea:#e0d6c3;--display:"Lora",Georgia,serif;--testo:"Jost","Avenir Next",system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--carta);color:var(--inchiostro);font-family:var(--testo);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden;background:var(--carta);color:var(--inchiostro);font-family:var(--testo);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 .wrap{max-width:560px;margin:0 auto;padding:0 20px}
 .k{font:500 13px var(--testo);letter-spacing:.26em;text-transform:uppercase;color:var(--oro)}
@@ -72,8 +72,8 @@ label{font:500 15px var(--testo);color:var(--seppia);display:block;margin-bottom
 input,textarea,select{width:100%;font:400 18px var(--testo);color:var(--inchiostro);background:#fffdf8;border:1.5px solid #d8ccb6;border-radius:12px;padding:13px 14px}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--oro)}
 textarea{min-height:88px;resize:vertical}
-.scelta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.scelta input{position:absolute;opacity:0;pointer-events:none}
+.scelta{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative}
+.scelta input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
 .scelta label{margin:0;text-align:center;padding:15px 10px;border:1.5px solid #c9bea9;border-radius:14px;font:500 17px var(--testo);color:var(--inchiostro);cursor:pointer}
 .scelta input:checked+label{background:var(--cera);border-color:var(--cera);color:var(--carta)}
 .scelta input:focus-visible+label{outline:2px solid var(--oro);outline-offset:2px}
