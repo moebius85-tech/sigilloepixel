@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sofia &amp; Luca · 19.09.2027</title>
+<meta name="description" content="Esempio di video-invito Sigillo&amp;Pixel con conferma della presenza.">
+<meta property="og:title" content="Sofia &amp; Luca si sposano">
+<meta property="og:description" content="Aprite l'invito: toccate il sigillo.">
+<meta property="og:image" content="https://moebius85-tech.github.io/sigilloepixel/img/carosello-villa-2.jpg">
+<meta name="theme-color" content="#f6f1e7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+:root{--carta:#f6f1e7;--carta-2:#ece4d3;--inchiostro:#22263f;--seppia:#55514c;--cera:#262b4a;--cera-scura:#171a30;--oro:#a88a4f;--oro-chiaro:#d8c08a;--linea:#e0d6c3;--display:"Lora",Georgia,serif;--testo:"Jost","Avenir Next",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--carta);color:var(--inchiostro);font-family:var(--testo);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.k{font:500 13px var(--testo);letter-spacing:.26em;text-transform:uppercase;color:var(--oro)}
+h2{font:400 34px/1.2 var(--display);margin:10px 0 22px}
+h2 i{font-style:italic}
+section{padding:64px 0;border-top:1px solid var(--linea)}
+
+/* busta iniziale */
+#busta{position:fixed;inset:0;z-index:50;background:radial-gradient(120% 90% at 50% 40%,#fbf7ef,#efe6d6 70%,#e6dbc6);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;transition:opacity .9s ease}
+#busta.via{opacity:0;pointer-events:none}
+#busta .per{font:italic 22px var(--display);color:var(--seppia)}
+#busta .chi{font:italic 400 46px/1.1 var(--display);margin:10px 0 44px}
+#sigillo{width:168px;height:168px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 36% 32%,#3d4577,#262b4a 55%,#171a30);box-shadow:0 14px 30px rgba(23,26,48,.35),inset 0 0 0 9px rgba(255,255,255,.05),inset 0 0 0 11px rgba(216,192,138,.35);color:var(--oro-chiaro);font:italic 44px var(--display);animation:respiro 2.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+#sigillo:focus-visible{outline:2px solid var(--oro);outline-offset:6px}
+@keyframes respiro{50%{transform:scale(1.04);box-shadow:0 18px 38px rgba(23,26,48,.4),inset 0 0 0 9px rgba(255,255,255,.05),inset 0 0 0 11px rgba(216,192,138,.5)}}
+#busta .tocca{margin-top:30px;font:500 14px var(--testo);letter-spacing:.24em;text-transform:uppercase;color:var(--oro)}
+#pixel{position:fixed;inset:0;z-index:60;pointer-events:none}
+
+/* invito */
+.invito{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:#f8f4ec}
+.invito img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;opacity:0;transform:scale(1.06);transition:opacity 1.6s ease,transform 6s ease-out}
+.aperto .invito img{opacity:1;transform:scale(1)}
+.nomi{position:relative;margin-top:24svh;text-align:center;padding:0 20px}
+.nomi>*{opacity:0;transform:translateY(12px);transition:opacity 1.1s ease,transform 1.1s ease}
+.aperto .nomi>*{opacity:1;transform:none}
+.aperto .nomi>:nth-child(1){transition-delay:.9s}.aperto .nomi>:nth-child(2){transition-delay:1.3s}.aperto .nomi>:nth-child(3){transition-delay:1.8s}.aperto .nomi>:nth-child(4){transition-delay:2.2s}
+.sp{font:500 14px var(--testo);letter-spacing:.32em;color:var(--seppia)}
+.nm{font:italic 400 clamp(54px,15vw,84px)/1.02 var(--display);margin:14px 0 16px;text-shadow:0 0 18px rgba(248,244,236,.9)}
+.dt{font:400 26px var(--display);color:var(--oro);letter-spacing:.08em}
+.giu{display:inline-block;margin-top:22px;font:500 15px var(--testo);color:var(--inchiostro);background:rgba(248,244,236,.85);border:1px solid var(--linea);padding:10px 18px;border-radius:30px;text-decoration:none}
+
+/* programma */
+.lettera{font:italic 22px/1.55 var(--display);color:var(--seppia)}
+.tl{list-style:none;margin-top:8px}
+.tl li{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--linea)}
+.tl .ora{font:500 22px var(--display);color:var(--oro)}
+.tl b{display:block;font:500 19px var(--testo)}
+.tl span{color:var(--seppia)}
+
+.luoghi{display:grid;gap:16px}
+.luogo{background:#fbf8f2;border:1px solid var(--linea);border-radius:18px;padding:22px}
+.luogo .k{font-size:12px}
+.luogo h3{font:400 25px var(--display);margin:6px 0 4px}
+.luogo p{color:var(--seppia)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:500 17px var(--testo);border-radius:14px;padding:15px 20px;text-decoration:none;cursor:pointer;border:0;-webkit-tap-highlight-color:transparent}
+.btn.sec{background:transparent;color:var(--inchiostro);border:1.5px solid #c9bea9;margin-top:14px}
+.btn.pri{background:var(--cera);color:var(--carta);width:100%}
+.btn.pri:active{background:var(--cera-scura)}
+
+/* rsvp */
+form{display:grid;gap:18px}
+label{font:500 15px var(--testo);color:var(--seppia);display:block;margin-bottom:6px}
+input,textarea,select{width:100%;font:400 18px var(--testo);color:var(--inchiostro);background:#fffdf8;border:1.5px solid #d8ccb6;border-radius:12px;padding:13px 14px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--oro)}
+textarea{min-height:88px;resize:vertical}
+.scelta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scelta input{position:absolute;opacity:0;pointer-events:none}
+.scelta label{margin:0;text-align:center;padding:15px 10px;border:1.5px solid #c9bea9;border-radius:14px;font:500 17px var(--testo);color:var(--inchiostro);cursor:pointer}
+.scelta input:checked+label{background:var(--cera);border-color:var(--cera);color:var(--carta)}
+.scelta input:focus-visible+label{outline:2px solid var(--oro);outline-offset:2px}
+.solo-si[hidden]{display:none}
+.entro{text-align:center;color:var(--seppia);font-size:15px}
+.grazie{text-align:center;padding:26px 10px}
+.grazie .nm{font-size:44px;margin:6px 0 10px;text-shadow:none}
+.err{color:#9b3b2e;font-size:15px}
+
+/* area sposi */
+.sposi{background:var(--cera);color:var(--carta);border-top:0}
+.sposi .k{color:var(--oro-chiaro)}
+.sposi p.nota{color:#c9c0b0}
+.conti{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0}
+.conto{background:rgba(255,255,255,.06);border-radius:14px;padding:16px 10px;text-align:center}
+.conto b{display:block;font:400 34px var(--display);color:var(--carta)}
+.conto span{font-size:14px;color:#c9c0b0}
+.lista{list-style:none;border-top:1px solid rgba(255,255,255,.12)}
+.lista li{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.lista .n{font-weight:500}
+.lista .d{font-size:15px;color:#c9c0b0}
+.lista .s{font-size:14px;white-space:nowrap;padding:3px 10px;border-radius:20px;align-self:flex-start}
+.lista .s.si{background:rgba(168,138,79,.3);color:var(--oro-chiaro)}
+.lista .s.no{background:rgba(255,255,255,.08);color:#c9c0b0}
+.lista li.nuovo{animation:lampo 2s ease}
+@keyframes lampo{0%{background:rgba(216,192,138,.25)}100%{background:transparent}}
+
+footer{padding:48px 0 60px;text-align:center;color:var(--seppia);font-size:15px}
+footer img{width:64px;margin:0 auto 12px;opacity:.9}
+footer a{color:var(--inchiostro)}
+.demo{position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;z-index:40;background:rgba(246,241,231,.92);border:1px solid var(--linea);color:var(--seppia);font:500 12px var(--testo);letter-spacing:.16em;padding:6px 10px;border-radius:20px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:var(--cera-scura);color:var(--carta);padding:12px 18px;border-radius:12px;font-size:15px;transition:.3s;z-index:70;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo">ESEMPIO</div>
+
+<div id="busta" role="dialog" aria-label="Busta dell'invito">
+  <div class="per">Un invito per te da</div>
+  <div class="chi">Sofia &amp; Luca</div>
+  <button id="sigillo" aria-label="Rompi il sigillo e apri l'invito">S·L</button>
+  <div class="tocca">Toccate il sigillo</div>
+</div>
+<canvas id="pixel"></canvas>
+
+<main>
+  <header class="invito">
+    <img src="../img/portfolio-villa-melograni.jpg" alt="Acquerello del cancello di una villa tra bouganville e melograni">
+    <div class="nomi">
+      <div class="sp">SI SPOSANO</div>
+      <div class="nm">Sofia<br>&amp; Luca</div>
+      <div class="dt">19 · 09 · 2027</div>
+      <a class="giu" href="#programma">Scopri la giornata ↓</a>
+    </div>
+  </header>
+
+  <section id="programma"><div class="wrap">
+    <div class="k">Il programma</div>
+    <h2>Vi aspettiamo per<br><i>festeggiare insieme</i></h2>
+    <p class="lettera">«Dopo dieci anni, tre traslochi e un cane, abbiamo deciso: ci sposiamo. E vogliamo voi accanto.»</p>
+    <ul class="tl">
+      <li><div class="ora">17:00</div><div><b>Cerimonia</b><span>Chiesa di San Giorgio</span></div></li>
+      <li><div class="ora">18:30</div><div><b>Aperitivo in giardino</b><span>Villa tra i melograni</span></div></li>
+      <li><div class="ora">20:30</div><div><b>Cena</b><span>Sotto il pergolato</span></div></li>
+      <li><div class="ora">23:30</div><div><b>Taglio della torta</b><span>E poi si balla</span></div></li>
+    </ul>
+  </div></section>
+
+  <section id="luoghi"><div class="wrap">
+    <div class="k">Dove</div>
+    <h2>I luoghi</h2>
+    <div class="luoghi">
+      <div class="luogo"><div class="k">Cerimonia · 17:00</div><h3>Chiesa di San Giorgio</h3><p>Piazza del Duomo</p><button class="btn sec mappa">📍 Apri la mappa</button></div>
+      <div class="luogo"><div class="k">Ricevimento · 18:30</div><h3>Villa tra i melograni</h3><p>Parcheggio riservato agli ospiti</p><button class="btn sec mappa">📍 Apri la mappa</button></div>
+    </div>
+  </div></section>
+
+  <section id="rsvp"><div class="wrap">
+    <div class="k">Conferma la presenza</div>
+    <h2>Ci sarai?</h2>
+    <div id="rsvp-box">
+    <form id="f" novalidate>
+      <div><label for="nome">Nome e cognome</label><input id="nome" name="nome" autocomplete="name" required></div>
+      <div class="scelta" role="radiogroup" aria-label="Partecipazione">
+        <input type="radio" name="ci" id="si" value="si" checked><label for="si">Sì, ci sarò!</label>
+        <input type="radio" name="ci" id="no" value="no"><label for="no">Purtroppo no</label>
+      </div>
+      <div class="solo-si"><label for="quanti">Quante persone, te compreso/a?</label>
+        <select id="quanti" name="quanti"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div>
+      <div class="solo-si"><label for="allergie">Allergie o intolleranze</label><input id="allergie" name="allergie" placeholder="Es. celiachia, niente frutta secca"></div>
+      <div><label for="msg">Un messaggio per gli sposi (facoltativo)</label><textarea id="msg" name="msg"></textarea></div>
+      <p class="err" id="err" hidden>Scrivi il tuo nome per confermare.</p>
+      <button class="btn pri" type="submit">Invia la risposta</button>
+      <p class="entro">Rispondi entro il 30 giugno 2027</p>
+    </form>
+    </div>
+  </div></section>
+
+  <section class="sposi" id="sposi"><div class="wrap">
+    <div class="k">Area sposi · anteprima</div>
+    <h2>Così Sofia e Luca<br><i>vedono le risposte</i></h2>
+    <p class="nota">Ogni conferma arriva in un elenco aggiornato, consultabile dal telefono. Provate a rispondere qui sopra: comparirete in cima.</p>
+    <div class="conti">
+      <div class="conto"><b id="c-pers">0</b><span>persone</span></div>
+      <div class="conto"><b id="c-si">0</b><span>conferme</span></div>
+      <div class="conto"><b id="c-no">0</b><span>non vengono</span></div>
+    </div>
+    <ul class="lista" id="lista"></ul>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <img src="../img/emblema.png" alt="">
+  Questo è un esempio di <b>Video-invito Sigillo</b> di Sigillo&amp;Pixel.<br>
+  Volete il vostro? <a href="https://instagram.com/sigilloepixel">Scriveteci SIGILLO su Instagram</a><br>
+  oppure guardate <a href="../#pacchetti">pacchetti e prezzi</a>.
+</div></footer>
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s);
+  const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600)};
+
+  // apertura sigillo: il sigillo si sbriciola in pixel
+  const cv=$('#pixel'),ctx=cv.getContext('2d');let aperto=false;
+  function apri(){
+    if(aperto)return;aperto=true;
+    const s=$('#sigillo').getBoundingClientRect();
+    const dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';ctx.scale(dpr,dpr);
+    const cx=s.left+s.width/2,cy=s.top+s.height/2,r=s.width/2,step=7,P=[];
+    const col=['#262b4a','#1c2040','#3d4577','#d8c08a','#a88a4f','#2f3560'];
+    for(let y=-r;y<r;y+=step)for(let x=-r;x<r;x+=step){if(x*x+y*y>r*r)continue;
+      const a=Math.atan2(y,x),d=Math.hypot(x,y)/r,v=2+Math.random()*5;
+      P.push({x:cx+x,y:cy+y,vx:Math.cos(a)*v*(.4+d)+(Math.random()-.5)*2,vy:Math.sin(a)*v*(.4+d)-Math.random()*3,c:col[(Math.random()*(d>.8?6:3))|0],s:step-1,l:1,dl:.008+Math.random()*.012});}
+    $('#sigillo').style.visibility='hidden';
+    setTimeout(()=>{$('#busta').classList.add('via');document.body.classList.add('aperto')},350);
+    (function loop(){ctx.clearRect(0,0,innerWidth,innerHeight);let vivi=0;
+      for(const p of P){if(p.l<=0)continue;vivi++;p.x+=p.vx;p.y+=p.vy;p.vy+=.12;p.vx*=.985;p.l-=p.dl;ctx.globalAlpha=Math.max(p.l,0);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.s,p.s)}
+      if(vivi)requestAnimationFrame(loop);else cv.remove();})();
+  }
+  $('#sigillo').addEventListener('click',apri);
+
+  document.querySelectorAll('.mappa').forEach(b=>b.addEventListener('click',()=>toast('Nell\'invito vero qui si apre la mappa del luogo')));
+
+  // risposte di esempio + quelle provate in questa pagina
+  const esempi=[
+    {nome:'Giulia e Andrea Rossi',ci:'si',quanti:2,allergie:'',t:'2 giorni fa'},
+    {nome:'Zia Carla',ci:'si',quanti:1,allergie:'Celiachia',t:'3 giorni fa'},
+    {nome:'Marco Bianchi',ci:'no',quanti:0,allergie:'',t:'4 giorni fa'},
+    {nome:'Famiglia Esposito',ci:'si',quanti:4,allergie:'Niente frutta secca (bimbo)',t:'5 giorni fa'},
+    {nome:'Chiara Conti',ci:'si',quanti:2,allergie:'Vegetariana',t:'1 settimana fa'},
+    {nome:'Paolo e Sara',ci:'si',quanti:2,allergie:'',t:'1 settimana fa'},
+    {nome:'Nonna Pina',ci:'si',quanti:1,allergie:'',t:'1 settimana fa'},
+    {nome:'Luca Ferri',ci:'no',quanti:0,allergie:'',t:'2 settimane fa'}];
+  let mie=[];try{mie=JSON.parse(localStorage.getItem('sp-demo-rsvp')||'[]')}catch(e){}
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function disegna(nuovo){
+    const tutte=[...mie,...esempi];let pers=0,si=0,no=0;
+    $('#lista').innerHTML=tutte.map((r,i)=>{if(r.ci==='si'){si++;pers+=+r.quanti}else no++;
+      const det=r.ci==='si'?`${r.quanti} ${r.quanti==1?'persona':'persone'}${r.allergie?' · '+esc(r.allergie):''}`:'Non può esserci';
+      return `<li class="${nuovo&&i===0?'nuovo':''}"><div><div class="n">${esc(r.nome)}</div><div class="d">${det} · ${esc(r.t)}</div></div><span class="s ${r.ci}">${r.ci==='si'?'Ci sarà':'No'}</span></li>`}).join('');
+    $('#c-pers').textContent=pers;$('#c-si').textContent=si;$('#c-no').textContent=no;
+  }
+  disegna();
+
+  const f=$('#f');
+  f.addEventListener('change',()=>{const si=f.ci.value==='si';document.querySelectorAll('.solo-si').forEach(e=>e.hidden=!si)});
+  f.addEventListener('submit',e=>{e.preventDefault();
+    const nome=f.nome.value.trim();if(!nome){$('#err').hidden=false;f.nome.focus();return}
+    const r={nome,ci:f.ci.value,quanti:f.ci.value==='si'?+f.quanti.value:0,allergie:f.ci.value==='si'?f.allergie.value.trim():'',t:'adesso'};
+    mie.unshift(r);try{localStorage.setItem('sp-demo-rsvp',JSON.stringify(mie.slice(0,5)))}catch(e){}
+    $('#rsvp-box').innerHTML=r.ci==='si'
+      ?`<div class="grazie"><div class="k">Grazie!</div><div class="nm">Ci vediamo<br>il 19 settembre</div><p>Sofia e Luca hanno ricevuto la tua risposta.</p><a class="btn sec" href="#sposi">Guarda come la vedono loro ↓</a></div>`
+      :`<div class="grazie"><div class="k">Grazie</div><div class="nm">Ci mancherai</div><p>Sofia e Luca hanno ricevuto la tua risposta.</p><a class="btn sec" href="#sposi">Guarda come la vedono loro ↓</a></div>`;
+    disegna(true);
+  });
+})();
+</script>
+</body>
+</html>
