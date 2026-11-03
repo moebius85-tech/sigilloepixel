@@ -380,22 +380,27 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       ctx.fillStyle='#fbf8f1';ctx.fillRect(0,0,W,H);
       const cx=W/2, bw=W*.8, bh=bw*.66, by=H*.5;
       const apri=ease((t-2)/1.4), sale=ease((t-3.2)/1.6), testo=ease((t-4.6)/1.2);
-      // carta che esce
-      const ch=bh*.95, cy=by - bh/2 + 6 - sale*bh*.75;
+      const L=cx-bw/2, R=cx+bw/2, T=by-bh/2, B=by+bh/2, V=by+bh*.05;
+      const fy=T, tip=fy + (bh*.55)*(1-2*apri);
+      // 1. interno della busta (dietro a tutto)
+      ctx.fillStyle='#d9cbb0';ctx.fillRect(L,T,bw,bh);
+      // 2. patta aperta: sta dietro al cartoncino
+      if(apri>.5){ctx.fillStyle='#d6c7aa';ctx.beginPath();ctx.moveTo(L,fy);ctx.lineTo(cx,tip);ctx.lineTo(R,fy);ctx.closePath();ctx.fill();}
+      // 3. cartoncino che esce dalla tasca
+      const ch=bh*.93, cy=T + bh*.05 - sale*bh*.42;
       ctx.fillStyle='#fffdf8';ctx.strokeStyle='#e3d9c4';ctx.lineWidth=1;
       ctx.fillRect(cx-bw*.44,cy,bw*.88,ch);ctx.strokeRect(cx-bw*.44,cy,bw*.88,ch);
       ctx.save();ctx.globalAlpha=testo;ctx.textAlign='center';ctx.fillStyle='#2a2622';
       ctx.font=`italic ${W*.085}px "Lora", Georgia, serif`;ctx.fillText('Elena & Luca',cx,cy+ch*.36);
       ctx.fillStyle='#a8833f';ctx.font=`${W*.04}px "Lora", Georgia, serif`;ctx.fillText('III · VII · MMXXVII',cx,cy+ch*.52);
       ctx.fillStyle='#6d6359';ctx.font=`${W*.032}px Jost, sans-serif`;ctx.fillText('SAVE THE DATE',cx,cy+ch*.2);ctx.restore();
-      // busta
-      ctx.fillStyle='#e9dfcb';ctx.fillRect(cx-bw/2,by-bh/2,bw,bh);
-      ctx.fillStyle='#e2d6be';ctx.beginPath();ctx.moveTo(cx-bw/2,by+bh/2);ctx.lineTo(cx,by);ctx.lineTo(cx+bw/2,by+bh/2);ctx.closePath();ctx.fill();
-      ctx.fillStyle='#ddd0b6';ctx.beginPath();ctx.moveTo(cx-bw/2,by-bh/2);ctx.lineTo(cx-bw/2,by+bh/2);ctx.lineTo(cx,by+bh*.05);ctx.closePath();ctx.fill();
-      ctx.beginPath();ctx.moveTo(cx+bw/2,by-bh/2);ctx.lineTo(cx+bw/2,by+bh/2);ctx.lineTo(cx,by+bh*.05);ctx.closePath();ctx.fill();
-      // patta
-      const fy=by-bh/2, tip=fy + (bh*.55)*(1-2*apri);
-      ctx.fillStyle=apri>.5?'#d6c7aa':'#efe6d4';ctx.beginPath();ctx.moveTo(cx-bw/2,fy);ctx.lineTo(cx,tip);ctx.lineTo(cx+bw/2,fy);ctx.closePath();ctx.fill();
+      // 4. davanti della tasca: copre il cartoncino solo sotto la V
+      ctx.fillStyle='#e9dfcb';ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(cx,V);ctx.lineTo(R,T);ctx.lineTo(R,B);ctx.lineTo(L,B);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#e2d6be';ctx.beginPath();ctx.moveTo(L,B);ctx.lineTo(cx,by+bh*.12);ctx.lineTo(R,B);ctx.closePath();ctx.fill();
+      ctx.strokeStyle='rgba(120,100,70,.18)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(cx,V);ctx.lineTo(R,T);ctx.stroke();
+      // 5. patta chiusa o in chiusura: sta davanti
+      if(apri<=.5){ctx.fillStyle='#efe6d4';ctx.beginPath();ctx.moveTo(L,fy);ctx.lineTo(cx,tip);ctx.lineTo(R,fy);ctx.closePath();ctx.fill();
+        ctx.strokeStyle='rgba(120,100,70,.18)';ctx.beginPath();ctx.moveTo(L,fy);ctx.lineTo(cx,tip);ctx.lineTo(R,fy);ctx.stroke();}
       // sigillo
       if(apri<.5){const r=W*.075, sy=fy+bh*.55*(1-2*apri);
         ctx.fillStyle='#7d1f24';ctx.beginPath();ctx.arc(cx,sy,r,0,7);ctx.fill();
