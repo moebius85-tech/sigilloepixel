@@ -311,10 +311,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="testa" style="margin-bottom:0">
       <p class="px">Preventivo</p>
       <h2>Raccontateci il vostro matrimonio</h2>
-      <p>Compilate il modulo: prepariamo il messaggio, voi lo inviate su Instagram o per email. Rispondiamo entro 24 ore con listino e disponibilità.</p>
+      <p>Compilate il modulo: prepariamo il messaggio, voi lo inviate su WhatsApp, Instagram o per email. Rispondiamo entro 24 ore con listino e disponibilità.</p>
       <div class="contatti">
         <span>Instagram: <a href="https://instagram.com/sigilloepixel" target="_blank" rel="noopener">@sigilloepixel</a></span>
         <span>Email: <a href="mailto:sigilloepixel@gmail.com">sigilloepixel@gmail.com</a></span>
+        <span>WhatsApp: <a href="https://wa.me/393534262510?text=Ciao%20Sigillo%26Pixel!%20Ci%20sposiamo%20e%20vorremmo%20un%20invito%20ad%20acquerello%20%F0%9F%92%8C" target="_blank" rel="noopener">+39 353 426 2510</a></span>
       </div>
     </div>
     <form id="modulo" novalidate>
@@ -332,6 +333,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <pre id="testo-msg"></pre>
         <div class="azioni">
           <button class="btn" type="button" id="copia">Copia il messaggio</button>
+          <a class="btn" id="via-wa" href="https://wa.me/393534262510" target="_blank" rel="noopener">Invia su WhatsApp</a>
           <a class="btn ghost" href="https://ig.me/m/sigilloepixel" target="_blank" rel="noopener">Apri Instagram</a>
           <a class="btn ghost" id="via-mail" href="mailto:sigilloepixel@gmail.com">Invia per email</a>
         </div>
@@ -341,7 +343,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </section>
 
-<footer><div class="wrap"><span>Sigillo&amp;Pixel · Wedding stationery &amp; digital storytelling</span><span>Inviti illustrati e animati, consegna in tutta Italia</span></div></footer>
+<footer><div class="wrap"><span>Sigillo&amp;Pixel · Wedding stationery &amp; digital storytelling</span><span>Inviti illustrati e animati, consegna in tutta Italia · <a href="https://wa.me/393534262510?text=Ciao%20Sigillo%26Pixel!%20Ci%20sposiamo%20e%20vorremmo%20un%20invito%20ad%20acquerello%20%F0%9F%92%8C" target="_blank" rel="noopener">WhatsApp +39 353 426 2510</a></span></div></footer>
 
 <script>
 (()=>{
@@ -423,7 +425,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     out.textContent=`Ciao Sigillo&Pixel! Siamo ${v('nomi')}.\n`+
       (d?`Ci sposiamo il ${d}`:'Non abbiamo ancora fissato la data')+(v('luogo')?` a ${v('luogo')}.`:'.')+
       `\nCi interessa: ${v('pacchetto')}.`+(v('idee')?`\nIdee: ${v('idee')}`:'')+`\nPotete mandarci listino e disponibilità?`;
-    document.getElementById('via-mail').href='mailto:sigilloepixel@gmail.com?subject='+encodeURIComponent('Richiesta preventivo – '+v('nomi'))+'&body='+encodeURIComponent(out.textContent); esito.hidden=false; info.textContent=''; esito.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
+    document.getElementById('via-wa').href='https://wa.me/393534262510?text='+encodeURIComponent(out.textContent); document.getElementById('via-mail').href='mailto:sigilloepixel@gmail.com?subject='+encodeURIComponent('Richiesta preventivo – '+v('nomi'))+'&body='+encodeURIComponent(out.textContent); esito.hidden=false; info.textContent=''; esito.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
   });
   document.getElementById('copia').addEventListener('click',()=>{
     const testo=out.textContent;
