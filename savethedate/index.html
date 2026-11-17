@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Save the date · Sofia &amp; Luca</title>
+<meta name="description" content="Esempio di save the date da grattare di Sigillo&amp;Pixel: grattate il sigillo e scoprite la data.">
+<meta property="og:title" content="Grattate il sigillo: abbiamo una data da dirvi">
+<meta property="og:image" content="https://moebius85-tech.github.io/sigilloepixel/img/portfolio-villa-melograni.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&family=Jost:wght@400;500&display=swap">
+<style>
+:root{--ink:#22263f;--gold:#a88a4f;--sep:#55514c;--paper:#f8f4ec}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--paper);font-family:Jost,sans-serif;color:var(--ink);display:flex;align-items:center;justify-content:center;overflow:hidden;-webkit-user-select:none;user-select:none}
+.card{position:relative;width:min(92vw,calc(92vh*0.75));aspect-ratio:3/4;border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(34,38,63,.18);background:#fff}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.txt{position:absolute;left:6%;right:6%;top:11%;text-align:center;padding:5% 0 6%;background:radial-gradient(ellipse at center,rgba(250,247,240,.92) 0%,rgba(250,247,240,.75) 45%,rgba(250,247,240,0) 72%)}
+.k{font-size:clamp(10px,2.6vw,13px);letter-spacing:.32em;text-transform:uppercase;color:var(--sep);font-weight:500}
+.n{font-family:Lora,serif;font-style:italic;font-size:clamp(30px,9vw,46px);margin:.25em 0 .15em}
+.d{font-family:Lora,serif;font-size:clamp(18px,5vw,24px);color:var(--gold);letter-spacing:.12em}
+.p{font-size:clamp(10px,2.6vw,12px);letter-spacing:.28em;text-transform:uppercase;color:var(--sep);margin-top:.6em}
+.f{position:absolute;left:0;right:0;bottom:5%;text-align:center;font-family:Lora,serif;font-style:italic;color:var(--sep);font-size:clamp(12px,3.4vw,15px)}
+canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .9s ease}
+canvas.done{opacity:0;pointer-events:none}
+.hint{position:absolute;left:0;right:0;bottom:-44px;text-align:center;font-size:13px;color:var(--sep);letter-spacing:.08em}
+.wrap{position:relative}
+.by{position:fixed;bottom:12px;left:0;right:0;text-align:center;font-size:12px;color:#8d887f}
+.by a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <img src="../img/portfolio-villa-melograni.jpg" alt="Villa tra i melograni ad acquerello">
+    <div class="txt">
+      <div class="k">Save the date</div>
+      <div class="n">Sofia &amp; Luca</div>
+      <div class="d">19 · 09 · 2027</div>
+      <div class="p">Villa del Melograno</div>
+    </div>
+    <div class="f">L'invito arriver&agrave;&hellip;</div>
+    <canvas id="c"></canvas>
+  </div>
+  <div class="hint" id="hint">Grattate il sigillo con il dito</div>
+</div>
+<div class="by">Esempio di <a href="../">Sigillo&amp;Pixel</a> · nomi e date di fantasia</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),hint=document.getElementById('hint');
+const seal=new Image(); seal.src='../img/emblema.png';
+let W,H,done=false,drawing=false,last=null;
+function paint(){
+  const r=c.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+  W=c.width=r.width*dpr;H=c.height=r.height*dpr;
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,'#efe6d3');g.addColorStop(1,'#e2d5bb');
+  x.globalCompositeOperation='source-over';x.fillStyle=g;x.fillRect(0,0,W,H);
+  for(let i=0;i<1400;i++){x.fillStyle=`rgba(120,95,50,${Math.random()*.05})`;x.fillRect(Math.random()*W,Math.random()*H,2,2)}
+  const s=Math.min(W,H)*.42,cx=W/2,cy=H*.48;
+  const rg=x.createRadialGradient(cx-s*.15,cy-s*.15,s*.1,cx,cy,s*.55);rg.addColorStop(0,'#4b5a8c');rg.addColorStop(1,'#232c52');
+  x.fillStyle=rg;x.beginPath();
+  for(let a=0;a<Math.PI*2;a+=Math.PI/18){const rr=s*.5*(1+(a*7%1)*.05+Math.sin(a*5)*.03);x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr)}
+  x.closePath();x.fill();
+  if(seal.complete&&seal.naturalWidth){x.globalAlpha=.9;x.drawImage(seal,cx-s*.3,cy-s*.3,s*.6,s*.6);x.globalAlpha=1}
+  x.fillStyle='#55514c';x.textAlign='center';x.font=`500 ${Math.round(W*.032)}px Jost, sans-serif`;
+  x.fillText('ABBIAMO UNA DATA DA DIRVI',cx,H*.16);
+  x.font=`italic ${Math.round(W*.05)}px Lora, serif`;x.fillText('grattate il sigillo',cx,H*.82);
+}
+seal.onload=paint;window.addEventListener('resize',()=>{if(!done)paint()});paint();
+function pos(e){const r=c.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*W/r.width,y:(t.clientY-r.top)*H/r.height}}
+function scratch(p){x.globalCompositeOperation='destination-out';x.lineCap='round';x.lineJoin='round';x.lineWidth=W*.16;
+  x.beginPath();x.moveTo((last||p).x,(last||p).y);x.lineTo(p.x,p.y);x.stroke();if(last){for(let k=0;k<=4;k++)mark({x:last.x+(p.x-last.x)*k/4,y:last.y+(p.y-last.y)*k/4})}else mark(p);last=p}
+const G=24,cells=new Set();
+function mark(p){const r=W*.08;for(let gx=0;gx<G;gx++)for(let gy=0;gy<G;gy++){const cx=(gx+.5)*W/G,cy=(gy+.5)*H/G;if((cx-p.x)**2+(cy-p.y)**2<r*r)cells.add(gx+','+gy)}}
+function check(){if(cells.size/(G*G)>.45&&!done){done=true;c.classList.add('done');hint.textContent='Ci vediamo il 19 settembre \u{1F48C}';if(navigator.vibrate)navigator.vibrate(30)}}
+const start=e=>{drawing=true;last=null;scratch(pos(e));hint.style.opacity=.4;e.preventDefault()};
+const move=e=>{if(!drawing)return;scratch(pos(e));e.preventDefault()};
+const end=()=>{if(drawing){drawing=false;check()}};
+c.addEventListener('mousedown',start);c.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
+c.addEventListener('touchstart',start,{passive:false});c.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end);
+</script>
+</body>
+</html>
