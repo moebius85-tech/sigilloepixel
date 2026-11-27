@@ -3,6 +3,7 @@
 Questo repo è il sito del brand (GitHub Pages: https://moebius85-tech.github.io/sigilloepixel/)
 e la base di lavoro di Claude per Sigillo&Pixel. Leggi questo file all'inizio di ogni sessione.
 Scrivi sempre in italiano. Il repo è pubblico: qui niente dati privati, password o numeri di conti.
+Sul Mac di Leonardo fai sempre `git pull` all'inizio: Claude pubblica spesso direttamente su GitHub.
 
 ## Chi siamo
 
@@ -37,6 +38,8 @@ Scrivi sempre in italiano. Il repo è pubblico: qui niente dati privati, passwor
 
 - **Voce del brand:** `.claude/instagram/voice.md` (al "noi", si dà del "voi" agli sposi;
   dettagli concreti della location; emoji solo 🎨 🌿 💌 💍).
+- **Reel che funzionano:** `.claude/instagram/swipe.md` (scritto da `/ig-viral`, letto da `/ig-reel` e `/ig-plan`).
+- **Storico dei reel scritti:** `.claude/instagram/log.md`.
 - **Documenti** (connettore Claude Docs):
   - Piano e cose da fare: `8a4e5941-9fdf-4620-8fc0-e12fa16bd849` (calendario, "Da fare per Leonardo")
   - Bibbia del brand: `fcd813e5-050f-4825-8eca-87301b8ef028`
@@ -48,7 +51,8 @@ Scrivi sempre in italiano. Il repo è pubblico: qui niente dati privati, passwor
 
 ## Skill
 
-Skill del progetto in `.claude/skills/` (dal repo instagram-agent-skill, adattate):
+Skill del progetto in `.claude/skills/` (dal repo instagram-agent-skill, adattate). Sono l'unica
+copia: sul Mac si usano aprendo Claude Code nella cartella del repo.
 
 | Skill | Quando usarla |
 |---|---|
@@ -63,22 +67,26 @@ Skill del progetto in `.claude/skills/` (dal repo instagram-agent-skill, adattat
 | `/ig-repurpose` | riusare un contenuto in altri formati |
 | `/ig-plan`, `/ig-audit`, `/ig-profile` | piano editoriale, revisione dei risultati, profilo |
 
-Nota: `hookscore.py`, `detect.py` e `humanize.py` sono tarati sull'inglese. Sui testi italiani i
-punteggi escono più bassi del vero: usali come indicazione, non come verdetto. `beats.py` e i
-controlli di lunghezza della caption restano validi. Gli script usano solo Python standard e non
-vanno su internet.
+Adattamenti per noi: la lettura di Instagram dal Chrome di Leonardo a ritmo umano è prevista
+(pubblicare no); YouTube/yt_dlp non si usano. `hookscore.py`, `detect.py` e `humanize.py` sono
+tarati sull'inglese: sui testi italiani i punteggi escono più bassi del vero, usali come
+indicazione. `beats.py` e i controlli di lunghezza della caption restano validi. Gli script usano
+solo Python standard e non vanno su internet. Nelle sessioni cloud il push da riga di comando non
+funziona: per scrivere nel repo usa lo strumento GitHub `create_or_update_file`.
 
 Skill dell'account (non in questo repo): sigillo-video-invito, sigillo-whatsapp-location,
 sigillo-controllo-numeri, sigillo-pubblica-instagram.
 
 ## Compiti programmati
 
-- **Lista del mattino**, ogni giorno alle 7:12: 5 commenti da incollare, DM, WhatsApp, cose da fare.
+- **Lista del mattino**, ogni giorno alle 7:12: 5 commenti (scritti con `/ig-comment`, ripuliti
+  con `/ig-human`), DM con bozze, WhatsApp, cose da fare.
+- **Reel che funzionano**, il 1° e il 15 del mese alle 13:37: `/ig-viral` su 8-10 account,
+  aggiorna `swipe.md`, propone 3 idee con `/ig-reel` da approvare.
 - **Pacchetto creativo**, domenica sera: prepara e programma i contenuti della settimana.
 - **Kit Baglio Borgesati**: promemoria d'invio il 1/12.
 
 ## Stato (27/11/2026)
 
-- Skill `ig-*` e `voice.md` installate e verificate (commit f771184).
-- Da fare con l'ok di Leonardo: usare `/ig-comment` e `/ig-human` nella lista del mattino;
-  nuovo compito settimanale con `/ig-viral` e `/ig-reel` sui reel di matrimonio che funzionano.
+- Skill `ig-*` e `voice.md` installate e verificate (commit f771184); copie in `~/.claude/` sul
+  Mac da rimuovere.
