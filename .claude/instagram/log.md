@@ -6,7 +6,7 @@ Storico dei copioni approvati da `/ig-reel`, letto da `/ig-audit`.
 
 - **Formula hook:** #18 Cold Open Demo (hookscore 44.5, sottostimato sull'italiano)
 - **Prima riga:** "Rompete il sigillo: ecco il Baglio Borgesati."
-- **Durata:** ~26,6 s, 8 beat a 165 wpm, loop sul "rompete il sigillo" finale
+- **Durata:** ~27,3 s, 8 beat a 165 wpm, loop sul "rompete il sigillo" finale
 - **Chiusura:** Commentate SIGILLO
 - **Stato:** approvato da Leonardo il 27/11, da montare nel pacchetto creativo.
 - **Uscita:** non prima del 6/12 (almeno una settimana dopo il reel "Così i vostri ospiti apriranno l'invito" del 1/12, che apre con lo stesso sigillo).
